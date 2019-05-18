@@ -5,7 +5,7 @@ from datetime import datetime
 
 import pygal
 import requests
-from flask import (Flask, abort, jsonify, make_response, redirect,
+from flask import (Flask, abort, jsonify, make_response,
                    render_template, request, url_for)
 
 app = Flask(__name__)
