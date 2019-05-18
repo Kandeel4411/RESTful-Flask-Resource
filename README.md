@@ -105,7 +105,7 @@ Through using the uri key supplied by the `GET` request
 
 `PUT /api/campaigns/id`
 
-    curl -H 'Content-Type: application/json' -X PUT -d '{"country":"EGY"}' http://localhost:5000/api/campaigns/1
+    curl -H 'Content-Type: application/json' -X PUT -d '{"country":"EGY"}' http://localhost:5000/api/campaigns/2
 
 ### Response
 
@@ -118,7 +118,7 @@ Through using the uri key supplied by the `GET` request
 
 `DELETE /api/campaigns/id`
 
-    curl -X DELETE -H 'Accept: application/json' http://localhost:5000/api/campaigns/id
+    curl -X DELETE -H 'Accept: application/json' http://localhost:5000/api/campaigns/1
 
 ### Response
 
