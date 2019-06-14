@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import re
-from collections import OrderedDict
 from datetime import datetime
 
 import pygal
@@ -80,31 +79,27 @@ def campaign_analysis():
     if end_date < start_date:
         abort(403)
 
-    # i.e: EGY, USA
-    x_axis = list(set(campaign[x] for campaign in campaigns))
+    # i.e: {EGY:0, USA:0}
+    x_axis = dict.fromkeys([campaign[x] for campaign in campaigns], 0)
 
-    # i.e Technology : {EGY:1, USA:1}, Sports : {USA:3}
-    y_axis = OrderedDict()
-    for x_label in x_axis:
-        for campaign in campaigns:
-            if campaign[x] == x_label:
-                try:
-                    y_axis[campaign[y]]
-                except KeyError:
-                    y_axis[campaign[y]] = {campaign[x]: 1}
-                    continue
-                try:
-                    y_axis[campaign[y]][campaign[x]] += 1
-                except KeyError:
-                    y_axis[campaign[y]][campaign[x]] = 1
+    # i.e Technology : {EGY:1, USA:1}, Sports : {EGY:0, USA:3}
+    y_axis = {}
+    for campaign in campaigns:
+        if campaign[x] in x_axis:
+            try:
+                y_axis[campaign[y]]
+            except KeyError:
+                y_axis[campaign[y]] = x_axis.copy()
+            finally:
+                y_axis[campaign[y]][campaign[x]] += 1
 
     # Bar chart based on the given dimensions
     chart = pygal.Bar()
 
-    chart.x_labels = x_axis
+    chart.x_labels = x_axis.keys()
 
     for y_label, x_labels in y_axis.items():
-        chart.add(str(y_label), [x_label for _, x_label in x_labels.items()])
+        chart.add(str(y_label), [x_label for x_label in x_labels.values()])
 
     filtered_campaigns = [{key: value for key, value in campaign.items()
                            if key in fields}
