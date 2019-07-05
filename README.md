@@ -136,12 +136,7 @@ Optional params:<br>
    *The keys that will be shown in the Campaigns table*
   - Format: `key,key,..`  i.e: country,goal,budget
   - Default: `all fields`
-  - 
-
-* ?duration<br>
-   *The start and end dates that will be displayed in the Bar chart header*
-  - Format: `dd-mm-YY,dd-mm-YY`  i.e: 1-4-2018,1-8-2019
-  - Default: `1-12-2018,1-12-2019`
+  
 ### Request
 
 `GET /api/campaigns/analysis`
