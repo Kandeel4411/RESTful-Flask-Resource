@@ -3,8 +3,6 @@
 This is a bare-bones example of a Flask application providing a RESTful API for a campaign resource.
 
 The entire application is contained within the `app.py` file.
-
-*Note: this was my first time building a RESTful API and using the Flask framework so the quality might not be upto the best standards, in addition to time-constraints due to my final exams starting at the 25th*
 # Prequisites
 
 Must have python3.6+ installed.

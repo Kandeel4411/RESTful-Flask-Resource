@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import re
-from datetime import datetime
 
 import pygal
 import requests
@@ -75,9 +74,6 @@ def campaign_analysis():
 
     x, y = get_dimensions(words=words)
     fields = get_fields(words=words, keys=keys)
-    start_date, end_date = get_duration()
-    if end_date < start_date:
-        abort(403)
 
     # i.e: {EGY:0, USA:0}
     x_axis = dict.fromkeys([campaign[x] for campaign in campaigns], 0)
@@ -107,7 +103,7 @@ def campaign_analysis():
 
     return render_template("graph.html", graph_data=chart.render_data_uri(),
                            x=x, y=y, campaigns=filtered_campaigns,
-                           start_date=start_date.date(), end_date=end_date.date())
+                           )
 
 
 def get_dimensions(words):
@@ -138,25 +134,6 @@ def get_fields(words, keys):
 
     # removing duplicate fields
     return set(fields[0].split(","))
-
-
-def get_duration():
-    """ returns duration query parameter """
-    duration = request.args.get(
-        "duration", default="1-12-2018,1-12-2019", type=str)
-
-    # ?duration format = dd-mm-year,dd-mm-year    start,end
-    date = r"([0-2]?[0-9]|[3][0-1])-(0?[0-9]|1[0-2])-\d{4}"
-    duration_pattern = re.compile(
-        pattern=f"^({date}),({date})$")
-    duration = re.match(pattern=duration_pattern, string=duration)
-    if not duration:
-        abort(status=403)
-    return (datetime.strptime(date, "%d-%m-%Y")
-
-            # first date and second date is 3 groups apart
-            for date in duration.groups()[::3]
-            )
 
 
 def dummy_category():
