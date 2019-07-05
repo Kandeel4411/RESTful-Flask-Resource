@@ -22,10 +22,10 @@ Must have python3.6+ installed.
 
 ## Run the app
 
-    python app.py
+    pipenv run python app.py
 Or
 
-    flask run
+    pipenv run flask run
 *Note: you may need to set FLASK_APP enviroment variable equal to app.py if this option doesn't work*
 
 
