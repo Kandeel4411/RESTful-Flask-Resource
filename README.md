@@ -21,6 +21,7 @@ Must have python3.6+ installed.
         ` pip install -r requirements.txt `
 
 ## Run the app
+If you installed globally, remove `pipenv run` from the commands
 
     pipenv run python app.py
 Or
