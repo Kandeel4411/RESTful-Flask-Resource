@@ -11,5 +11,5 @@ pep8==1.7.1
 pycodestyle==2.5.0
 pygal==2.4.0
 requests==2.22.0
-urllib3==1.25.2
+urllib3==1.26.5
 Werkzeug==0.15.4
